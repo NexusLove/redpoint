@@ -9,14 +9,16 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 2) Discord Webhook Deleter
 3) Discord UserID Lookup Tool
 4) Discord Account Disabler
-5) Generic Webpage Cloner
-6) Reverse IPV4 Lookup Tool (relies on [ip-api.com](https://ip-api.com))
+5) Discord Token Checker
+6) Generic Webpage Cloner
+7) Reverse IPV4 Lookup Tool (relies on [ip-api.com](https://ip-api.com))
+8) Image Search Tool
+9) Current Crypto Prices
 
 ## Other Commands I Might Add Soon; I at Least Have the Idea Down.
 1) Discord Token Logger Generator
-2) Reverse Image Search CLI
-3) Discord Commandline Client Mode
-4) Discord Token Lookup (gathers info on someone by their token)
+2) Discord Commandline Client Mode
+3) Discord Token Lookup (gathers info on someone by their token)
 
 ## Other Stuff To Note
 RedPoint automatically notifies you of any updates :D
