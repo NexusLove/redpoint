@@ -147,15 +147,15 @@ string check_token_validity(string token) {
             Header{ {"User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"} },
             Header{ {"Authorization", token} });
     if (r.status_code == 200) {
-        string returnval = token + GREEN + " VALID " + to_string(r.status_code) + "\n";
+        string returnval = GREEN + token + " VALID " + to_string(r.status_code) + "\n" + RESET;
         return returnval;
     }
     else if (r.status_code == 401) {
-        string returnval = token + RED + " INVALID " + to_string(r.status_code) + "\n";
+        string returnval = RED + token + " INVALID " + to_string(r.status_code) + "\n" + RESET;
         return returnval;
     }
     else if (r.status_code == 429) {
-        string returnval = token + YELLOW + " RATELIMITED " + to_string(r.status_code) + "\n";
+        string returnval = YELLOW + token + " RATELIMITED " + to_string(r.status_code) + "\n" + RESET;
         return returnval;
     }
     else {
