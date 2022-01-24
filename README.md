@@ -34,6 +34,7 @@ RedPoint automatically notifies you of any updates :D
 ```bash
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential
+$ sudo apt install cmake
 $ git clone https://github.com/13-05/redpoint
 $ cd redpoint
 $ git clone https://github.com/libcpr/cpr.git
