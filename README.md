@@ -26,9 +26,6 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 2) Discord Commandline Client Mode
 3) Discord Token Lookup (gathers info on someone by their token)
 
-## Other Stuff To Note
-RedPoint automatically notifies you of any updates :D
-
 ## Building
 ### LINUX (debian)
 ```bash
