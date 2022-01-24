@@ -29,5 +29,35 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 ## Other Stuff To Note
 RedPoint automatically notifies you of any updates :D
 
+## Building
+### LINUX (debian)
+```bash
+$ sudo apt update && sudo apt upgrade
+$ sudo apt install build-essential
+$ git clone https://github.com/13-05/redpoint
+$ cd redpoint
+$ git clone https://github.com/libcpr/cpr.git
+$ cd cpr
+$ mkdir build && cd build
+$ sudo cmake ..
+$ sudo make
+$ sudo make install
+$ cd ..
+$ cd ..
+$ sudo cp -r /usr/local/lib/libcpr.so* /usr/lib/
+$ sudo cp /usr/local/lib/libcurl* /usr/lib/
+$ git clone https://github.com/nlohmann/json.git
+$ cd json
+$ mkdir build && cd build
+$ sudo cmake ..
+$ sudo make
+$ sudo make install
+$ cd ..
+$ cd ..
+$ cd src
+$ g++ redpoint.m.tool.cpp -o redpoint.m -lcpr
+$ ./redpoint.m
+```
+
 ## The Future
 I'll add as many features as I can to this thing, so stay tuned!
