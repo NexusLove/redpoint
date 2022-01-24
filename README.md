@@ -4,7 +4,9 @@ Have you ever wanted a tool to exploit multiple services? A single program to pe
 ## About
 RedPoint rose from my need of a better, more stable, and more powerful version of [dsc.red](https://github.com/13-05/discord.RED). So, I archived *dsc.red*, and started from scratch. One command at a time.
 <p align="center">
+  <br />
   <img src="https://raw.githubusercontent.com/13-05/redpoint/main/etc/redpoint.png" width="350" title="redpoint's logo">
+  <br />
 </p>
 
 ## What's With the Name, Anyway?
