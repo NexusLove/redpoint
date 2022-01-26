@@ -26,6 +26,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 2) Discord Commandline Client Mode
 3) Discord Token Lookup (gathers info on someone by their token)
 4) Discord Server Cloner
+5) Discord ANSI Colored Text Generator
 
 ## Building
 ### LINUX (debian)
