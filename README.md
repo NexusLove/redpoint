@@ -26,8 +26,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 2) Discord Commandline Client Mode
 3) Discord Token Lookup (gathers info on someone by their token)
 4) Discord Server Cloner
-5) Discord ANSI Colored Text Generator
-6) [Pastie.io](https://pastie.io) Paste CLI Interface
+5) [Pastie.io](https://pastie.io) Paste CLI Interface
 
 ## Use
 Download a precompiled windows 64 bit exe [here](https://github.com/13-05/redpoint/releases/tag/win64)!
