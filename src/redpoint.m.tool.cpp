@@ -56,11 +56,12 @@ void help() {
     cout << MAGENTA << "6)" << BLUE << " disable token " << BLUE << " | " << GREEN << " deletes a discord account by token" << endl;
     cout << MAGENTA << "7)" << BLUE << " token checker " << BLUE << " | " << GREEN << " looks for working tokens in a file" << endl;
     cout << MAGENTA << "8)" << BLUE << " nitro gen " << BLUE << " | " << GREEN << " generates random nitro codes and checks them" << endl;
+    cout << MAGENTA << "9)" << BLUE << " colored codeblock " << BLUE << " | " << GREEN << " generates a discord codeblock; with color!" << endl;
 
-    cout << MAGENTA << "9)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
-    cout << MAGENTA << "10)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
-    cout << MAGENTA << "11)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
-    cout << MAGENTA << "12)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices";
+    cout << MAGENTA << "10)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
+    cout << MAGENTA << "11)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
+    cout << MAGENTA << "12)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
+    cout << MAGENTA << "13)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices";
 
     cout << "\n\n";
 }
@@ -180,39 +181,82 @@ void check_crypto_prices() {
     cout << BLUE << "CURRENT CRYPTO PRICES:\n\n" << "Monero: $" << jsonA["USD"] << "USD\n" << "Bitcoin: $" << jsonB["USD"] << "USD\n" << "Ethereum: $" << jsonC["USD"] << "USD\n";
 }
 
-int randu(int min, int max){
-  int RANDNUM = min + (rand() % static_cast<int>(max - min + 1));
-  return RANDNUM;
+int randu(int min, int max) {
+    int RANDNUM = min + (rand() % static_cast<int>(max - min + 1));
+    return RANDNUM;
 }
 
-void bf_nitro_codes(){
-  /* globals */
-  int ncodelen = 16;
-  string code;
+/* thanks https://stackoverflow.com/a/3418285/17055513 :> */
+void replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    if (from.empty())
+        return;
+    size_t start_pos = 0;
+    while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
+}
 
-  /* char-choices */
-  char valid_nitro_chars[62] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5',
-'6', '7', '8', '9'};
+string colorize_str(string str) {
+    if (str.find("{BLACK}") != string::npos) {
+        replaceAll(str, "{BLACK}", "\x1b[0;30m");
+    }
+    if (str.find("{RED}") != string::npos) {
+        replaceAll(str, "{RED}", "\x1b[0;31m");
+    }
+    if (str.find("{GREEN}") != string::npos) {
+        replaceAll(str, "{GREEN}", "\x1b[0;32m");
+    }
+    if (str.find("{YELLOW}") != string::npos) {
+        replaceAll(str, "{YELLOW}", "\x1b[0;33m");
+    }
+    if (str.find("{BLUE}") != string::npos) {
+        replaceAll(str, "{BLUE}", "\x1b[0;34m");
+    }
+    if (str.find("{MAGENTA}") != string::npos) {
+        replaceAll(str, "{MAGENTA}", "\x1b[0;35m");
+    }
+    if (str.find("{CYAN}") != string::npos) {
+        replaceAll(str, "{CYAN}", "\x1b[0;36m");
+    }
+    if (str.find("{WHITE}") != string::npos) {
+        replaceAll(str, "{WHITE}", "\x1b[0;37m");
+    }
+    if (str.find("{RESET}") != string::npos) {
+        replaceAll(str, "{RESET}", "\x1b[0;0m");
+    }
+    string str2 = "```ansi\n" + str + "\n```";
+    return str2;
+}
 
-  /* generating the code */
-  for (int i = 0; i < ncodelen; i++){
-    int randint = randu(0, 62);
-    code += valid_nitro_chars[randint];
-  }
+void bf_nitro_codes() {
+    /* globals */
+    int ncodelen = 16;
+    string code;
 
-  /* testing the validity of the code */
-  string URL = "https://discordapp.com/api/v9/entitlements/gift-codes/" + code + "?with_application=false&with_subscription_plan=true";
-  cpr::Response r = cpr::Get(cpr::Url{URL});
+    /* char-choices */
+    char valid_nitro_chars[62] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+  'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5',
+  '6', '7', '8', '9' };
 
-  if (r.status_code == 200){
-    cout << GREEN << "https://discord.gift/" + code + " VALID" << endl;
-  }
-  else {
-    cout << YELLOW << "https://discord.gift/" + code + " INVALID" << endl;
-  }
+    /* generating the code */
+    for (int i = 0; i < ncodelen; i++) {
+        int randint = randu(0, 62);
+        code += valid_nitro_chars[randint];
+    }
+
+    /* testing the validity of the code */
+    string URL = "https://discordapp.com/api/v9/entitlements/gift-codes/" + code + "?with_application=false&with_subscription_plan=true";
+    cpr::Response r = cpr::Get(cpr::Url{ URL });
+
+    if (r.status_code == 200) {
+        cout << GREEN << "https://discord.gift/" + code + " VALID" << endl;
+    }
+    else {
+        cout << YELLOW << "https://discord.gift/" + code + " INVALID" << endl;
+    }
 
 }
 
@@ -352,15 +396,41 @@ void interpret(string inter) {
         /* just running the function, no user input is necessary */
         check_crypto_prices();
     }
-    else if (inter.find("nitro gen") != string::npos){
+    else if (inter.find("nitro gen") != string::npos) {
         int times;
         string timesstr;
         cout << RED << "times to bruteforce (int): ";
         getline(cin, timesstr);
         times = stoi(timesstr);
-        for (int i = 0; i < times; i++){
-          bf_nitro_codes();
+        for (int i = 0; i < times; i++) {
+            bf_nitro_codes();
         }
+    }
+    else if (inter.find("colored codeblock") != string::npos) {
+    /* globals :> */
+    string preformatted;
+
+    /* lemme tell them how to use it first lol */
+    cout << RED << "open https://github.com/13-05/redpoint/blob/main/etc/autoANSIinstructions.md in a browser for instructions on how to format your input correctly!" << endl;
+
+    /* user input!! */
+    cout << RED << "input the text: " << RESET;
+    getline(cin, preformatted);
+
+    /* let's send it to a paste so the escape char doesnt make the text */
+    /* colored right in the terminal... */
+    string formatted = colorize_str(preformatted);
+    cpr::Response paste = cpr::Post(cpr::Url{ "https://pastie.io/documents" },
+        cpr::Header{ {"content-type", "text/plain"} },
+        cpr::Body{ {formatted} });
+
+    json pastie_response = json::parse(paste.text);
+    string key = to_string(pastie_response["key"]);
+    string key1 = key.erase(0, 1);
+    string key2 = key1.erase(key1.size() - 1);
+
+    cout << BLUE << "now, copy the text at https://pastie.io/" << key2 << " and paste it in discord!" << endl;
+
     }
 }
 
