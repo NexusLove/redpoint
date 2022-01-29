@@ -43,6 +43,18 @@ void clearscr() {
 #endif
 }
 
+void enable_color_on_WIN(){
+  #ifdef _WIN32 // includes all windows architectures
+    DWORD dwMode;
+    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleMode(hOutput, &dwMode);
+    dwMode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    SetConsoleMode(hOutput, dwMode);
+  #else
+    // do nothing lmao
+  #endif
+}
+
 void help() {
     cout << "\n\n";
     cout << MAGENTA << "USABLE COMMANDS: \n\n";
@@ -473,6 +485,8 @@ void interpret(string inter) {
 
 int main()
 {
+    /* ENABLE COLORS */
+    enable_color_on_WIN();
 
     /* GLOBALS */
     int constant = 1;
