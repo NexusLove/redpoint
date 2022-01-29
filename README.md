@@ -33,7 +33,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 Download a precompiled windows 64 bit exe [here](https://github.com/13-05/redpoint/releases/tag/win64)!
 
 ## Building From Source
-### LINUX (debian)
+### LINUX (debian & [debian-based](https://en.wikipedia.org/wiki/Category:Debian-based_distributions))
 ```bash
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential
