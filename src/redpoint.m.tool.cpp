@@ -61,7 +61,8 @@ void help() {
     cout << MAGENTA << "10)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
     cout << MAGENTA << "11)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
     cout << MAGENTA << "12)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
-    cout << MAGENTA << "13)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices";
+    cout << MAGENTA << "13)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices" << endl;
+    cout << MAGENTA << "14)" << RED << " make paste " << BLUE << " | " << GREEN << " makes a https://pastie.io/ paste";
 
     cout << "\n\n";
 }
@@ -186,6 +187,18 @@ int randu(int min, int max) {
     return RANDNUM;
 }
 
+void paste(string input){
+    cpr::Response paste = cpr::Post(cpr::Url{ "https://pastie.io/documents" },
+            cpr::Header{ {"content-type", "text/plain"} },
+            cpr::Body{ {input} });
+
+        json pastie_response = json::parse(paste.text);
+        string key = to_string(pastie_response["key"]);
+        string key1 = key.erase(0, 1);
+        string key2 = key1.erase(key1.size() - 1);
+        cout << BLUE << "view your paste at  https://pastie.io/" << key2 << RESET << endl;
+}
+
 /* thanks https://stackoverflow.com/a/3418285/17055513 :> */
 void replaceAll(std::string& str, const std::string& from, const std::string& to) {
     if (from.empty())
@@ -258,6 +271,18 @@ void bf_nitro_codes() {
         cout << YELLOW << "https://discord.gift/" + code + " INVALID" << endl;
     }
 
+}
+
+void makepaste(string TEXT){
+  cpr::Response paste = cpr::Post(cpr::Url{ "https://pastie.io/documents" },
+            cpr::Header{ {"content-type", "text/plain"} },
+            cpr::Body{ { TEXT } });
+
+        json pastie_response = json::parse(paste.text);
+        string key = to_string(pastie_response["key"]);
+        string key1 = key.erase(0, 1);
+        string key2 = key1.erase(key1.size() - 1);
+        cout << BLUE << "paste is up at https://pastie.io/" << key2 << RESET << endl;
 }
 
 
@@ -384,7 +409,8 @@ void interpret(string inter) {
         tokenfile.open(inputtedtokenfile);
 
         if (!tokenfile.is_open()) {
-            cout << YELLOW << "there was an error opening " << inputtedtokenfile << endl;
+            cout << YELLOW <<
+"there was an error opening " << inputtedtokenfile << endl;
         }
         else {
             while (getline(tokenfile, line)) {
@@ -431,6 +457,17 @@ void interpret(string inter) {
 
     cout << BLUE << "now, copy the text at https://pastie.io/" << key2 << " and paste it in discord!" << endl;
 
+    }
+    else if (inter.find("make paste") != string::npos){
+      /* mini globals hehe */
+      string inp;
+
+      /* user input */
+      cout << RED << "text to paste: ";
+      getline(cin, inp);
+
+      /* making da paste :D */
+      makepaste(inp);
     }
 }
 
