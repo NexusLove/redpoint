@@ -250,7 +250,7 @@ string colorize_str(string str) {
     if (str.find("{RESET}") != string::npos) {
         replaceAll(str, "{RESET}", "\x1b[0;0m");
     }
-    string str2 = "```ansi\n" + str + "\n```";
+    string str2 = ">>> ```ansi\n" + str + "\n```";
     return str2;
 }
 
