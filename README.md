@@ -21,13 +21,13 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 9) Reverse IPV4 Lookup Tool (relies on [ip-api.com](https://ip-api.com))
 10) Image Search Tool
 11) Current Crypto Prices
+12) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
 
 ## Other Commands I Might Add Soon; I at Least Have the Idea Down.
 1) Discord Token Logger Generator
 2) Discord Commandline Client Mode
 3) Discord Token Lookup (gathers info on someone by their token)
 4) Discord Server Cloner
-5) [Pastie.io](https://pastie.io) Paste CLI Interface
 
 ## Use
 Download a precompiled windows 64 bit exe [here](https://github.com/13-05/redpoint/releases/tag/win64)!
