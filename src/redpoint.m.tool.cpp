@@ -50,8 +50,9 @@ void enable_color_on_WIN(){
     GetConsoleMode(hOutput, &dwMode);
     dwMode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
     SetConsoleMode(hOutput, dwMode);
+    system("title redpoint") // sets the console window's title on windows ;)
   #else
-    // do nothing lmao
+    // do nothing lmao, we cant do and dont have to do anything similar on unix systems
   #endif
 }
 
