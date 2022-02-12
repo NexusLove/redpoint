@@ -32,6 +32,8 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 ## Community
 Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?via=matrix.org)!
 
+Or, join our [Discord](https://dsc.gg/unwelcome)!
+
 ## Use
 Download a precompiled windows 64 bit exe [here](https://github.com/13-05/redpoint/releases/tag/win64)!
 
