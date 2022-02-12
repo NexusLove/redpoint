@@ -23,7 +23,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 11) Current Crypto Prices
 12) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
 
-## Other Commands I Might Add Soon; I at Least Have the Idea Down.
+## TODOs
 1) Discord Token Logger Generator
 2) Discord Commandline Client Mode
 3) Discord Token Lookup (gathers info on someone by their token)
