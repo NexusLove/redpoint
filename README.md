@@ -15,6 +15,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 4) Discord Account Disabler
 5) Discord Token Checker
 6) Discord Nitro Bruteforcer
+7) Paste.io generator
 
 ## TODOs
 1) Discord Token Logger Generator
