@@ -17,6 +17,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 6) Discord Nitro Bruteforcer
 7) Paste.io generator
 8) Website source code generator
+9) 2fa account recovery (requires authentication ticket, see special notes)
 
 ## TODOs
 1) Discord Token Logger Generator
@@ -32,6 +33,11 @@ Or, join our [Discord](https://dsc.gg/unwelcome)!
 ## Use
 Download node_modules, package.json, package-lock.json, and index.js into a folder, then open command prompt, run "cd /folderpathtofile", then run "node index.js"
 If the command fails you probably need to [install node](https://nodejs.org/en/download/)
+
+## Special Notes
+To get an authentication ticket, you need to go to the discord login page, enter in your password/email and when it shows the 2fa screen open the network part of the inspect element page. Then enter anything into the text box and hit enter. As shown below, click on the payload for totp and copy the ticket. Then you can use that in redpoint! 
+![image](https://user-images.githubusercontent.com/45636528/154579650-e7e27dbc-83d8-493c-bcc5-3dd1c7ecc33c.png)
+
 
 ## The Future
 I'll add as many features as I can to this thing, so stay tuned!
