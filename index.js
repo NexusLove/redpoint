@@ -4,6 +4,7 @@ import { Webhook } from "discord-webhook-node";
 import fetch from "node-fetch";
 import readline from "readline";
 import { stdin as input, stdout as output } from 'node:process';
+import request from "request"
 const rl = readline.createInterface({ input, output });
 /* globals & funcs */
 //testing webhook: https://discord.com/api/webhooks/912467556084899870/-0Db2ZiTzZ3ppI_wc5gB0grTSuNH99W5ipk5uXhWO-B-AMtapByS6Yuk9zTQOLvVRZLc
@@ -41,7 +42,7 @@ function help() {
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file`);
   console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook you want to send the valid code to>`);
 
-  console.log(`${MAGENTA}9)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source"`);
+  console.log(`${MAGENTA}9)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
   console.log(`${MAGENTA}10)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
   console.log(`${MAGENTA}11)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
   console.log(`${MAGENTA}12)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
@@ -145,7 +146,18 @@ let response = await fetch("https://pastie.io/documents", {
     "mode": "cors",
     "credentials": "omit"
   });
+
 return response.json();
+}
+async function getSource(URL){
+ request(
+      { uri: `${URL}` },
+    async function(error, response, body) {
+        let paste = await pasteIO(body)
+        let trypaste = JSON.parse(JSON.stringify(paste))
+          console.log(`View your website source code at https://pastie.io/${trypaste.key}`)
+      }
+  );
 }
 async function main(){
 rl.question('Please enter a command: ', (answer) => {
@@ -184,15 +196,20 @@ if (check) {hook.send(`${check}`)}
 } else if (answer.startsWith(`make paste`)){
   var args = answer.split(' ');
   let content = answer.split(' ').slice(2).join(' ');
-  //let content = args[2]
-  pasteIO(content).then(console.log).catch(console.err)
+  pasteIO(content).then(value => {
+  let trypaste = JSON.parse(JSON.stringify(value))
+  console.log(`View your paste at https://pastie.io/${trypaste.key}`)
+  }).catch(console.err)
+} else if (answer.startsWith(`clone webpage`)){
+  var args = answer.split(' ');
+  getSource(args[2])
 }
 rl.pause()
 });
 return "command executed";
 }
 welcome();
-nitro()
+getSource(`https://stackoverflow.com/questions/5801453/in-node-js-express-how-do-i-download-a-page-and-gets-its-html`)
 main().then(console.log()).catch(console.err)
 rl.on('pause', () => {
 rl.resume()
