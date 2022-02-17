@@ -6,6 +6,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 
 ## What's With the Name, Anyway?
 - `redpoint`: a cooler name alternative for `dsc.red` I had lying around.
+- `.m`: mobile; it works on multiple platforms, and is optimized for mobile!
 - `.tool`: it's a multitool!
 
 ## Current Commands
@@ -17,7 +18,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 6) Discord Nitro Bruteforcer
 7) Paste.io generator
 8) Website source code generator
-9) 2fa account recovery (requires authentication ticket, see special notes)
+9) 2fa account recovery (requires authentication ticket, see [Special Notes](https://github.com/13-05/redpoint/tree/redpoint-js#special-notes))
 
 ## TODOs
 1) Discord Token Logger Generator
@@ -31,11 +32,15 @@ Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?
 Or, join our [Discord](https://dsc.gg/unwelcome)!
 
 ## Use
-Download node_modules, package.json, package-lock.json, and index.js into a folder, then open command prompt, run "cd /folderpathtofile", then run "node index.js"
-If the command fails you probably need to [install node](https://nodejs.org/en/download/)
+```sh
+> git clone -b redpoint-js https://github.com/13-05/redpoint
+> cd redpoint
+> node index.js
+```
+If the `node index.js` fails, run `sudo apt install npm`.
 
 ## Special Notes
-To get an authentication ticket, you need to go to the discord login page, enter in your password/email and when it shows the 2fa screen open the network part of the inspect element page. Then enter anything into the text box and hit enter. As shown below, click on the payload for totp and copy the ticket. Then you can use that in redpoint! 
+To get an authentication ticket, you need to go to the discord login page, then enter your password & email. When it shows the 2fa screen, open the network tab of the inspect element page (`Ctrl` + `Shift` + `I` or `Fn` + `Shift` + `I` on most browsers). Then enter anything into the text box and hit enter. As shown below, click on the payload for totp and copy the ticket. Then you can use that in redpoint! 
 ![image](https://user-images.githubusercontent.com/45636528/154579650-e7e27dbc-83d8-493c-bcc5-3dd1c7ecc33c.png)
 
 
