@@ -8,7 +8,6 @@ import { stdin as input, stdout as output } from 'node:process';
 import request from "request";
 const rl = readline.createInterface({ input, output });
 /* globals & funcs */
-//testing webhook: https://discord.com/api/webhooks/912467556084899870/-0Db2ZiTzZ3ppI_wc5gB0grTSuNH99W5ipk5uXhWO-B-AMtapByS6Yuk9zTQOLvVRZLc
 let BLACK = "\x1b[1;30m";
 let RED = "\x1b[1;31m";
 let GREEN = "\x1b[1;32m";
