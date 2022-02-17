@@ -3,6 +3,7 @@
   "dependencies": {
     "discord-webhook-node": "^1.1.8",
     "node": "^17.4.0",
+    "request": "^2.88.2",
     "website-scraper": "^5.0.0"
   }
 }
