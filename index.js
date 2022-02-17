@@ -40,13 +40,12 @@ function help() {
   console.log(`${MAGENTA}6)${BLUE} disable token ${BLUE} | ${GREEN} deletes a discord account by token | ${CYAN} Syntax: disable token <token>`);
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file`);
   console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook you want to send the valid code to>`);
-  console.log(`${MAGENTA}9)${BLUE} colored codeblock ${BLUE} | ${GREEN} generates a discord codeblock; with color!`);
 
-  console.log(`${MAGENTA}10)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source"`);
-  console.log(`${MAGENTA}11)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
-  console.log(`${MAGENTA}12)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
-  console.log(`${MAGENTA}13)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
-  console.log(`${MAGENTA}14)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
+  console.log(`${MAGENTA}9)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source"`);
+  console.log(`${MAGENTA}10)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
+  console.log(`${MAGENTA}11)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
+  console.log(`${MAGENTA}12)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
+  console.log(`${MAGENTA}13)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
 
   console.log(RESET);
 }
