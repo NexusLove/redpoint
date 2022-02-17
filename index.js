@@ -39,14 +39,14 @@ function help() {
   console.log(`${MAGENTA}5)${BLUE} userid lookup ${BLUE} | ${GREEN} gets info on a discord userid | ${CYAN} Syntax: userid lookup <ID>`);
   console.log(`${MAGENTA}6)${BLUE} disable token ${BLUE} | ${GREEN} deletes a discord account by token | ${CYAN} Syntax: disable token <token>`);
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file`);
-  console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them`);
+  console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook you want to send the valid code to>`);
   console.log(`${MAGENTA}9)${BLUE} colored codeblock ${BLUE} | ${GREEN} generates a discord codeblock; with color!`);
 
   console.log(`${MAGENTA}10)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source"`);
   console.log(`${MAGENTA}11)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
   console.log(`${MAGENTA}12)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
   console.log(`${MAGENTA}13)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
-  console.log(`${MAGENTA}14)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste`);
+  console.log(`${MAGENTA}14)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
 
   console.log(RESET);
 }
@@ -101,11 +101,16 @@ function nitroGenerator(){
 async function nitro(codes){
 let nitroCode = nitroGenerator()
 for (let i = 0; i < codes; i++){
-sleep(2000)
+sleep(3000)
+sleep(1000)
 let e22z = await fetch(`https://discordapp.com/api/v9/entitlements/gift-codes/${nitroCode}`)
   console.log(e22z.status)
 if (e22z.status == 200) {
-  return `${nitroCode}`;} else return undefined;
+  return `${nitroCode}`;}
+  if (e22z.status == 429) {
+          console.log(`Hitting a ratelimit, trying again soon`)
+        sleep(5000)
+      sleep(5000)}
 }}
 async function disableToken(token){
 console.log(`attempting to disable token`)
@@ -119,6 +124,29 @@ await fetch(`https://discord.com/api/v9/users/@me`, {
     }
     })
 return "token disabled successfully";
+}
+async function pasteIO(content){
+let response = await fetch("https://pastie.io/documents", {
+    "headers": {
+      "accept": "application/json, text/javascript, */*; q=0.01",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "text/plain; charset=UTF-8",
+      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "x-requested-with": "XMLHttpRequest"
+    },
+    "referrer": "https://pastie.io/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": content,
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+  });
+return response.json();
 }
 async function main(){
 rl.question('Please enter a command: ', (answer) => {
@@ -152,8 +180,13 @@ deleteWebhook(URL).then(console.log).catch(console.err)
   var args = answer.split(' ');
   let webhook = args[2]
   const hook = new Webhook(webhook);
-let check = nitro(10);
+let check = nitro(10000);
 if (check) {hook.send(`${check}`)}
+} else if (answer.startsWith(`make paste`)){
+  var args = answer.split(' ');
+  let content = answer.split(' ').slice(2).join(' ');
+  //let content = args[2]
+  pasteIO(content).then(console.log).catch(console.err)
 }
 rl.pause()
 });
