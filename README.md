@@ -6,7 +6,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 
 ## What's With the Name, Anyway?
 - `redpoint`: a cooler name alternative for `dsc.red` I had lying around.
-- `.m`: mobile; it works on multiple platforms, and is optimized for mobile!
+- `.m`: mobile; it works on multiple platforms, and is [optimized for mobile](https://github.com/13-05/redpoint/blob/main/etc/mobile_wait_what.md)!
 - `.tool`: it's a multitool!
 
 ## Current Commands
