@@ -9,7 +9,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 - `.m`: mobile; it works on multiple platforms, and is [optimized for mobile](https://github.com/13-05/redpoint/blob/main/etc/mobile_wait_what.md)!
 - `.tool`: it's a multitool!
 
-## Current Commands ~~excluding clear & exit~~
+## Current Commands *excluding clear & exit
 1) Discord Webhook Spammer
 2) Discord Webhook Deleter
 3) Discord UserID Lookup Tool
@@ -22,10 +22,10 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 10) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
 
 ## TODOs
-1) Discord Token Logger Generator
-2) Discord Commandline Client Mode
-3) Discord Token Lookup (gathers info on someone by their token)
-4) Discord Server Cloner
+- [ ] Discord Token Logger Generator
+- [ ] Discord Commandline Client Mode
+- [ ] Discord Token Lookup (gathers info on someone by their token)
+- [ ] Discord Server Cloner
 
 ## Community
 Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?via=matrix.org)!
@@ -65,6 +65,3 @@ $ cd src
 $ g++ redpoint.m.tool.cpp -o redpoint.m -lcpr
 $ ./redpoint.m
 ```
-
-## The Future
-I'll add as many features as I can to this thing, so stay tuned!
