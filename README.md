@@ -5,10 +5,14 @@
 3) Discord UserID Lookup Tool
 4) Discord Token Checker
 5) Paste.io generator
-6) Website source code generator
-7) 2fa account recovery (requires authentication ticket, see [Special Notes](https://github.com/13-05/redpoint/tree/redpoint-js#special-notes))
+6) Generic Webpage Cloner
+7) 2FA Account Recoverer (requires authentication ticket, see [Special Notes](https://github.com/13-05/redpoint/tree/redpoint-js#special-notes))
 
 ## TODOs
+- [ ] Discord ANSI Codeblock Gen
+- [ ] Reverse IPV4 Lookup tool (relies on [ip-api.com](https://ip-api.com))
+- [ ] Image Search Tool
+- [ ] Current Crypto Prices
 - [ ] Discord Token Logger Generator
 - [ ] Discord Commandline Client Mode
 - [ ] Discord Token Lookup (gathers info on someone by their token)
