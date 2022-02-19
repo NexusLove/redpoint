@@ -68,14 +68,13 @@ void help() {
     cout << MAGENTA << "5)" << BLUE << " userid lookup " << BLUE << " | " << GREEN << " gets info on a discord userid" << endl;
     cout << MAGENTA << "6)" << BLUE << " disable token " << BLUE << " | " << GREEN << " deletes a discord account by token" << endl;
     cout << MAGENTA << "7)" << BLUE << " token checker " << BLUE << " | " << GREEN << " looks for working tokens in a file" << endl;
-    cout << MAGENTA << "8)" << BLUE << " nitro gen " << BLUE << " | " << GREEN << " generates random nitro codes and checks them" << endl;
-    cout << MAGENTA << "9)" << BLUE << " colored codeblock " << BLUE << " | " << GREEN << " generates a discord codeblock; with color!" << endl;
+    cout << MAGENTA << "8)" << BLUE << " colored codeblock " << BLUE << " | " << GREEN << " generates a discord codeblock; with color!" << endl;
 
-    cout << MAGENTA << "10)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
-    cout << MAGENTA << "11)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
-    cout << MAGENTA << "12)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
-    cout << MAGENTA << "13)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices" << endl;
-    cout << MAGENTA << "14)" << RED << " make paste " << BLUE << " | " << GREEN << " makes a https://pastie.io/ paste";
+    cout << MAGENTA << "9)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
+    cout << MAGENTA << "10)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
+    cout << MAGENTA << "11)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
+    cout << MAGENTA << "12)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices" << endl;
+    cout << MAGENTA << "13)" << RED << " make paste " << BLUE << " | " << GREEN << " makes a https://pastie.io/ paste";
 
     cout << "\n\n";
 }
@@ -255,36 +254,6 @@ string colorize_str(string str) {
     return str2;
 }
 
-void bf_nitro_codes() {
-    /* globals */
-    int ncodelen = 16;
-    string code;
-
-    /* char-choices */
-    char valid_nitro_chars[62] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-  'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5',
-  '6', '7', '8', '9' };
-
-    /* generating the code */
-    for (int i = 0; i < ncodelen; i++) {
-        int randint = randu(0, 62);
-        code += valid_nitro_chars[randint];
-    }
-
-    /* testing the validity of the code */
-    string URL = "https://discordapp.com/api/v9/entitlements/gift-codes/" + code + "?with_application=false&with_subscription_plan=true";
-    cpr::Response r = cpr::Get(cpr::Url{ URL });
-
-    if (r.status_code == 200) {
-        cout << GREEN << "https://discord.gift/" + code + " VALID" << endl;
-    }
-    else {
-        cout << YELLOW << "https://discord.gift/" + code + " INVALID" << endl;
-    }
-
-}
 
 void makepaste(string TEXT){
   cpr::Response paste = cpr::Post(cpr::Url{ "https://pastie.io/documents" },
@@ -434,16 +403,6 @@ void interpret(string inter) {
     else if (inter.find("cryptos") != string::npos) {
         /* just running the function, no user input is necessary */
         check_crypto_prices();
-    }
-    else if (inter.find("nitro gen") != string::npos) {
-        int times;
-        string timesstr;
-        cout << RED << "times to bruteforce (int): ";
-        getline(cin, timesstr);
-        times = stoi(timesstr);
-        for (int i = 0; i < times; i++) {
-            bf_nitro_codes();
-        }
     }
     else if (inter.find("colored codeblock") != string::npos) {
     /* globals :> */
