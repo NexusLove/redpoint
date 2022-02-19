@@ -9,7 +9,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 - `.m`: mobile; it works on multiple platforms, and is [optimized for mobile](https://github.com/13-05/redpoint/blob/main/etc/mobile_wait_what.md)!
 - `.tool`: it's a multitool!
 
-## Current Commands
+## Current Commands ~~excluding clear & exit~~
 1) Discord Webhook Spammer
 2) Discord Webhook Deleter
 3) Discord UserID Lookup Tool
