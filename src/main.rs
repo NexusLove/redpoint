@@ -1,6 +1,7 @@
 /* imports */
 use std::io;
 use std::io::Write;
+use std::io::Read;
 use std::process::Command;
 use std::collections::HashMap; // hashmaps for json go brrrrr
 use reqwest;
@@ -85,7 +86,20 @@ fn setcolor(inp: &str) {
   print!("{}", to_pr); // prints the color brrr
 }
 
-fn launch_initial_startup() {
+fn launch_initial_startup() -> String {
+  clearscr();
+  let mut usernameGLOB = String::new();
+  let doesitexist = std::path::Path::new("config.redpoint").exists();
+  if doesitexist == false {
+    let mut f = File::create("config.redpoint").expect("couldn't configure startup file!");
+    let mut usernameGLOB = getline(colored("{CYAN}what'd you like to be called?: "));
+    let usernameGLOB = usernameGLOB.trim_end().replace(" ", "_");
+    f.write_all(usernameGLOB.as_bytes()).expect("failed to write username to config.redpoint!");
+  }
+  else if doesitexist == true {
+    let mut f = File::open("config.redpoint").expect("couldn't access the startup file. aborting!");
+    f.read_to_string(& mut usernameGLOB).unwrap();
+  }
   clearscr();
   if cfg!(windows) {
     Command::new("cmd")
@@ -100,6 +114,12 @@ fn launch_initial_startup() {
   println!("{}", welcomestr);
   setcolor(MAGENTA);
   print!("[run \"help\" for a list of commands.]\n\n\n");
+
+  if doesitexist == false {
+    let mut f = File::open("config.redpoint").expect("couldn't access the startup file. aborting!");
+    f.read_to_string(& mut usernameGLOB).unwrap();
+  }
+  return usernameGLOB;
 }
 
 fn help() {
@@ -314,14 +334,15 @@ async fn process(inp: &str) {
 #[tokio::main]
 async fn main() {
     // initial setup
-    launch_initial_startup();
+    let mut usernameGLOB = launch_initial_startup();
+    let usernameGLOB = usernameGLOB.trim_end();
     let mut testinp = String::new();
     let runtimevar: i32 = 0;
 
 
     // constant input grabber and processor func
     while runtimevar == 0 {
-      let mut inp: String = getline(colored("{RED}red@redpoint:{BLUE}~{WHITE}$ "));
+      let mut inp: String = getline(format!("{RED}{usernameGLOB}@redpoint:{BLUE}~{WHITE}$ "));
       let inp = inp.trim_end(); // returns &str type
 
       process(inp).await;
