@@ -9,7 +9,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 - `.m`: mobile; it works on multiple platforms, and is [optimized for mobile](https://github.com/13-05/redpoint/blob/main/etc/mobile_wait_what.md)!
 - `.tool`: it's a multitool!
 
-## Current Commands ~~excluding clear & exit~~
+## Current Commands In The Most Upkept Branch *excluding clear & exit
 1) Discord Webhook Spammer
 2) Discord Webhook Deleter
 3) Discord UserID Lookup Tool
@@ -22,49 +22,20 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 10) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
 
 ## TODOs
-1) Discord Token Logger Generator
-2) Discord Commandline Client Mode
-3) Discord Token Lookup (gathers info on someone by their token)
-4) Discord Server Cloner
+- [ ] Discord Token Logger Generator
+- [ ] Discord Commandline Client Mode
+- [ ] Discord Token Lookup (gathers info on someone by their token)
+- [ ] Discord Server Cloner
 
 ## Community
 Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?via=matrix.org)!
 
 Or, join our [Discord](https://dsc.gg/unwelcome)!
 
-## Use
-Download a precompiled windows 64 bit exe [here](https://github.com/13-05/redpoint/releases/tag/win64)!
-
-## Building From Source
-### LINUX (debian & [debian-based](https://en.wikipedia.org/wiki/Category:Debian-based_distributions))
-```bash
-$ sudo apt update && sudo apt upgrade
-$ sudo apt install build-essential
-$ sudo apt install cmake
-$ git clone https://github.com/13-05/redpoint
-$ cd redpoint
-$ git clone https://github.com/libcpr/cpr.git
-$ cd cpr
-$ mkdir build && cd build
-$ sudo cmake ..
-$ sudo make
-$ sudo make install
-$ cd ..
-$ cd ..
-$ sudo cp -r /usr/local/lib/libcpr.so* /usr/lib/
-$ sudo cp /usr/local/lib/libcurl* /usr/lib/
-$ git clone https://github.com/nlohmann/json.git
-$ cd json
-$ mkdir build && cd build
-$ sudo cmake ..
-$ sudo make
-$ sudo make install
-$ cd ..
-$ cd ..
-$ cd src
-$ g++ redpoint.m.tool.cpp -o redpoint.m -lcpr
-$ ./redpoint.m
-```
+## Branches, Ranked By Feature Count
+- [redpoint-cpp](https://github.com/13-05/redpoint/tree/redpoint-cpp) ***branch maintained by me, original one with windows executable**
+- [redpoint-js](https://github.com/13-05/redpoint/tree/redpoint-js) ***branch maintained by [L](https://github.com/L5050), has many features and is done well**
+- [redpoint-rs_EXPERIMENTAL](https://github.com/13-05/redpoint/tree/redpoint-rs_EXPERIMENTAL) ***branch maintained by me and has many issues, but will soon be main branch for redpoint**
 
 ## The Future
 I'll add as many features as I can to this thing, so stay tuned!
