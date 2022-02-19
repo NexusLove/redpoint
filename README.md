@@ -8,10 +8,6 @@
 5) Discord ANSI Codeblock Gen ***BROKEN OR HALFWORKING**
 
 ## TODOs
-- [ ] Discord Token Logger Generator
-- [ ] Discord Commandline Client Mode
-- [ ] Discord Token Lookup (gathers info on someone by their token)
-- [ ] Discord Server Cloner
 - [ ] Finish Token Checker
 - [ ] Finish ANSI Codeblock Gen
 - [ ] Generic Webpage Cloner
@@ -19,6 +15,10 @@
 - [ ] Image Search Tool
 - [ ] Current Cryptos and Prices
 - [ ] Pastie Paste CLI Interface
+- [ ] Discord Token Logger Generator
+- [ ] Discord Commandline Client Mode
+- [ ] Discord Token Lookup (gathers info on someone by their token)
+- [ ] Discord Server Cloner
 
 ## Building From Source
 ### LINUX (debian & [debian-based](https://en.wikipedia.org/wiki/Category:Debian-based_distributions))
