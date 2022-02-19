@@ -66,15 +66,14 @@ void help() {
     cout << MAGENTA << "3)" << BLUE << " spam webhook " << BLUE << " | " << GREEN << " spams a discord webhook" << endl;
     cout << MAGENTA << "4)" << BLUE << " delete webhook " << BLUE << " | " << GREEN << " deletes a discord webhook" << endl;
     cout << MAGENTA << "5)" << BLUE << " userid lookup " << BLUE << " | " << GREEN << " gets info on a discord userid" << endl;
-    cout << MAGENTA << "6)" << BLUE << " disable token " << BLUE << " | " << GREEN << " deletes a discord account by token" << endl;
-    cout << MAGENTA << "7)" << BLUE << " token checker " << BLUE << " | " << GREEN << " looks for working tokens in a file" << endl;
-    cout << MAGENTA << "8)" << BLUE << " colored codeblock " << BLUE << " | " << GREEN << " generates a discord codeblock; with color!" << endl;
+    cout << MAGENTA << "6)" << BLUE << " token checker " << BLUE << " | " << GREEN << " looks for working tokens in a file" << endl;
+    cout << MAGENTA << "7)" << BLUE << " colored codeblock " << BLUE << " | " << GREEN << " generates a discord codeblock; with color!" << endl;
 
-    cout << MAGENTA << "9)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
-    cout << MAGENTA << "10)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
-    cout << MAGENTA << "11)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
-    cout << MAGENTA << "12)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices" << endl;
-    cout << MAGENTA << "13)" << RED << " make paste " << BLUE << " | " << GREEN << " makes a https://pastie.io/ paste";
+    cout << MAGENTA << "8)" << RED << " clone webpage " << BLUE << " | " << GREEN << " command-line \"view source\"" << endl;
+    cout << MAGENTA << "9)" << RED << " ip lookup " << BLUE << " | " << GREEN << " gets information for an Ipv4 address" << endl;
+    cout << MAGENTA << "10)" << RED << " image search " << BLUE << " | " << GREEN << " finds similar images based on a url" << endl;
+    cout << MAGENTA << "11)" << RED << " cryptos" << BLUE << " | " << GREEN << " fetches current XMR, BTC, & ETH prices" << endl;
+    cout << MAGENTA << "12)" << RED << " make paste " << BLUE << " | " << GREEN << " makes a https://pastie.io/ paste";
 
     cout << "\n\n";
 }
@@ -115,13 +114,6 @@ void userid_lookup(string USERID) {
 
 
     cout << BLUE << "username: " << uname << endl << "discrim: " << discrim << endl << "bot?: " << bot_bool << endl << "(unix) creation date: " << unixtimestr << endl;
-}
-
-void disable_token(string token) {
-    cout << BLUE << "attempting to disable token " << token << RESET << endl;
-    cpr::Response r = cpr::Patch(cpr::Url{ "https://discord.com/api/v9/users/@me" },
-        cpr::Header{ {"user-agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"} },
-        cpr::Payload{ {"date_of_birth", "2022-1-1"} });
 }
 
 void clone_page(string exac_page_url) {
@@ -309,25 +301,6 @@ void interpret(string inter) {
         getline(cin, userid);
 
         userid_lookup(userid);
-    }
-    else if (inter.find("disable token") != string::npos) {
-        /* mini global things */
-        string token;
-        string choice;
-
-        /* user input */
-        cout << RED << "input a token to disable: " << RESET;
-        getline(cin, token);
-
-        cout << YELLOW << "WARNING: THIS WILL PERMANENTLY DISABLE THE ACCOUNT. ARE YOU SURE?: y/n >> ";
-        getline(cin, choice);
-
-        if (choice == "y") {
-            disable_token(token);
-        }
-        else if (choice == "n") {
-            cout << BLUE << "alright, aborting the token disable." << endl;
-        }
     }
     else if (inter.find("delete webhook") != string::npos) {
         /* mini globals jej */
