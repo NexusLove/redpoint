@@ -1,0 +1,13 @@
+[package]
+name = "redpoint_rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html 1305: no u, default rust dialogue
+
+[dependencies]
+reqwest = { version = "0.11.9", features = ["blocking", "json"] } # json parsing & http reqs :>
+futures = "0.3" # for async / await stuff
+tokio = { version = "1.12.0", features = ["full"] } # for async brrr
+serde = { version = "1.0.136", features = ["derive"] }
+http = { version = "0.2.6" }
