@@ -15,13 +15,12 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 3) Discord UserID Lookup Tool
 4) Discord Account Disabler
 5) Discord Token Checker
-6) Discord Nitro Bruteforcer
-7) Discord ANSI Codeblock Gen
-8) Generic Webpage Cloner
-9) Reverse IPV4 Lookup Tool (relies on [ip-api.com](https://ip-api.com))
-10) Image Search Tool
-11) Current Crypto Prices
-12) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
+6) Discord ANSI Codeblock Gen
+7) Generic Webpage Cloner
+8) Reverse IPV4 Lookup Tool (relies on [ip-api.com](https://ip-api.com))
+9) Image Search Tool
+10) Current Crypto Prices
+11) [pastie.io](https://pastie.io) Paste CLI Interface (kinda crappy lmfao)
 
 ## TODOs
 1) Discord Token Logger Generator
