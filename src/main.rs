@@ -236,6 +236,20 @@ fn make_colored_codeblock(text: &str) -> String {
   return to_pr; // ez
 }
 
+fn catch_invalid_command(inp: &str) {
+  println!("{}command {}\"{}\"{} not found\n", YELLOW, CYAN, inp, YELLOW);
+  let mut x = getline(colored("{YELLOW}would you like to run {BLUE}\"help\"{YELLOW} for a list of {GREEN}usable commands{YELLOW}? {CYAN}[y/n]{WHITE} "));
+  let x = x.trim_end();
+  if x == "y" {
+    clearscr();
+    launch_initial_startup();
+    help();
+  }
+  else if x == "n" {
+    // do_nothing(); // ez
+  }
+}
+
 
 async fn process(inp: &str) {
   if inp == "exit" {
@@ -291,17 +305,7 @@ async fn process(inp: &str) {
                                                                                                              */
   }
   else {
-    println!("{}command {}\"{}\"{} not found\n", YELLOW, CYAN, inp, YELLOW);
-    let mut x = getline(colored("{YELLOW}would you like to run {BLUE}\"help\"{YELLOW} for a list of {GREEN}usable commands{YELLOW}? {CYAN}[y/n]{WHITE} "));
-    let x = x.trim_end();
-    if x == "y" {
-      clearscr();
-      launch_initial_startup();
-      help();
-    }
-    else if x == "n" {
-      // do_nothing();
-    }
+    catch_invalid_command(inp);
   }
 }
 
