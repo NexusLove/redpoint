@@ -32,7 +32,7 @@ Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?
 
 Or, join our [Discord](https://dsc.gg/unwelcome)!
 
-## Branches, Ranked By Feature Count
+## Branches to Install Redpoint From ***ranked by feature count**
 - [redpoint-cpp](https://github.com/13-05/redpoint/tree/redpoint-cpp) ***branch maintained by me, original one with windows executable**
 - [redpoint-js](https://github.com/13-05/redpoint/tree/redpoint-js) ***branch maintained by [L](https://github.com/L5050), has many features and is done well**
 - [redpoint-rs_EXPERIMENTAL](https://github.com/13-05/redpoint/tree/redpoint-rs_EXPERIMENTAL) ***branch maintained by me and has many issues, but will soon be main branch for redpoint**
