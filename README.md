@@ -32,6 +32,7 @@ Each link is a different-programming-language version of redpoint; click one for
 - [ ] Discord Commandline Client Mode
 - [ ] Discord Token Lookup (gathers info on someone by their token)
 - [ ] Discord Server Cloner
+- [ ] Phone # Lookup Tool
 
 ## Community
 Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?via=matrix.org)!
