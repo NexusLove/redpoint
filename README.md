@@ -19,6 +19,7 @@
 - [ ] Discord Commandline Client Mode
 - [ ] Discord Token Lookup (gathers info on someone by their token)
 - [ ] Discord Server Cloner
+- [ ] Phone # Lookup Tool
 
 ## Building From Source
 ### LINUX (debian & [debian-based](https://en.wikipedia.org/wiki/Category:Debian-based_distributions))
