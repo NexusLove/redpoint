@@ -40,13 +40,12 @@ function help() {
   console.log(`${MAGENTA}5)${BLUE} userid lookup ${BLUE} | ${GREEN} gets info on a discord userid | ${CYAN} Syntax: userid lookup <ID>`);
   console.log(`${MAGENTA}6)${BLUE} disable token ${BLUE} | ${GREEN} deletes a discord account by token | ${CYAN} Syntax: disable token <token>`);
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file`);
-  console.log(`${MAGENTA}8)${BLUE} nitro gen ${BLUE} | ${GREEN} generates random nitro codes and checks them | ${CYAN} Syntax: token gen <webhook to send the valid code to>`);
 
-  console.log(`${MAGENTA}9)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
-  console.log(`${MAGENTA}10)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
-  console.log(`${MAGENTA}11)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
-  console.log(`${MAGENTA}12)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
-  console.log(`${MAGENTA}13)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
+  console.log(`${MAGENTA}8)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
+  console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address`);
+  console.log(`${MAGENTA}10)${RED} image search ${BLUE} | ${GREEN} finds similar images based on a url`);
+  console.log(`${MAGENTA}11)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices`);
+  console.log(`${MAGENTA}12)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
   console.log(`${MAGENTA}13)${RED} brute-force 2fa ${BLUE} | ${GREEN} brute forces a lost 2fa account | ${CYAN} Syntax: brute-force 2fa <authentication ticket>`);
 
   console.log(RESET);
@@ -135,30 +134,6 @@ if (response.status == 400){
 await fs.writeFile('codes.txt', `${auth}\n`, { flag: 'a+' }, err => {})
 } else if (response.status == 200) return `${GREEN}${auth}`;
 }}}
-function nitroGenerator(){
-  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const length = 16;
-    let nitroCode = ' ';
-        const charactersLength = characters.length;
-        for ( let i = 0; i < length; i++ ) {
-            nitroCode += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-  return `${nitroCode}`;
-}
-async function nitro(codes){
-for (let i = 0; i < codes; i++){
-let nitroCode = nitroGenerator()
-sleep(3000)
-sleep(1000)
-let e22z = await fetch(`https://discordapp.com/api/v9/entitlements/gift-codes/${nitroCode}`)
-  console.log(e22z.status)
-if (e22z.status == 200) {
-  return `${nitroCode}`;}
-  if (e22z.status == 429) {
-          console.log(`Hitting a ratelimit, trying again soon`)
-        sleep(5000)
-      sleep(5000)}
-}}
 async function disableToken(token){
 console.log(`attempting to disable token`)
 await fetch(`https://discord.com/api/v9/users/@me`, {
@@ -233,13 +208,6 @@ disableToken(token).then(console.log).catch(console.err)
   var args = answer.split(' ');
   let URL = args[2]
 deleteWebhook(URL).then(console.log).catch(console.err)
-} else if (answer.startsWith(`nitro gen`)){
-  console.log(`generating nitro codes...`)
-  var args = answer.split(' ');
-  let webhook = args[2]
-  const hook = new Webhook(webhook);
-let check = nitro(10000);
-if (check) {hook.send(`${check}`)}
 } else if (answer.startsWith(`make paste`)){
   var args = answer.split(' ');
   let content = answer.split(' ').slice(2).join(' ');
