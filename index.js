@@ -181,6 +181,7 @@ async function getSource(URL){
       }
   );
 }
+
 async function main(){
 rl.question('Please enter a command: ', async (answer) => {
   if (answer == `exit`){
