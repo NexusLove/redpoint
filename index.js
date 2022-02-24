@@ -183,7 +183,7 @@ async function getSource(URL){
 }
 
 async function main(){
-rl.question('Please enter a command: ', async (answer) => {
+rl.question('', async (answer) => {
   if (answer == `exit`){
 console.log(`exiting...`)
 return process.exit()
