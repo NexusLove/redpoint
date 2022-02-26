@@ -17,6 +17,12 @@ let MAGENTA = "\x1b[1;35m";
 let CYAN = "\x1b[1;36m";
 let WHITE = "\x1b[1;37m";
 let RESET = "\x1b[1;0m";
+let $log;
+console.oldLog = console.log;
+console.log = async function(value){
+    console.oldLog(value);
+    window.$log = value;
+};
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -25,6 +31,7 @@ function sleep(milliseconds) {
     }
   }
 }
+
 function clearscr() {
   console.clear();
 }
