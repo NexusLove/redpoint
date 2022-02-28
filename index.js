@@ -21,7 +21,7 @@ let $log;
 console.oldLog = console.log;
 console.log = async function(value){
     console.oldLog(value);
-    window.$log = value;
+    $log = value;
 };
 function sleep(milliseconds) {
   var start = new Date().getTime();
