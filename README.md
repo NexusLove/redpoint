@@ -11,7 +11,6 @@
 ## TODOs
 - [ ] Discord ANSI Codeblock Gen
 - [ ] Reverse IPV4 Lookup tool (relies on [ip-api.com](https://ip-api.com))
-- [ ] Image Search Tool
 - [ ] Current Crypto Prices
 - [ ] Discord Token Logger Generator
 - [ ] Discord Commandline Client Mode
