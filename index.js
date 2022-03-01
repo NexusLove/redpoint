@@ -235,8 +235,8 @@ rl.pause()
 return "command executed";
 }
 welcome();
-main().then(console.log()).catch(console.err)
+main().then().catch(console.err)
 rl.on('pause', () => {
 rl.resume()
-main().then(console.log()).catch(console.err)
+main().then().catch(console.err)
 });
