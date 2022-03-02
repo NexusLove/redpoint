@@ -10,21 +10,14 @@ const rl = readline.createInterface({ input, output });
 console.clear();
 let client;
 let webhook;
-let obj = `{
-  "token": "your bot token here",
-  "webhook": "your webhook URL here"
-}`
 async function newClient(){
-console.log(`starting webhook client, use "$exit" to exit`)
-if (!fs.existsSync(`config.json`)) {
-fs.writeFile('config.json', obj, (err) => {
-  if (err) throw err;
-});
-console.log(`no config.json file was found, so we created one.\nPlease fill it out for the code to work`)
-process.exit()
-} else {
+console.log(`\nstarting webhook client, use "$exit" to exit`)
 let rawdata = fs.readFileSync('config.json');
 let config = JSON.parse(rawdata);
+if (config.token == "your bot token here" || config.webhook == "your webhook URL here") {
+console.log(`Please fill "config.json" out for the code to work`)
+process.exit()
+} else {
 let token = config.token
 webhook = config.webhook
 const response = await fetch(webhook)
