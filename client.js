@@ -14,6 +14,8 @@ let obj = `{
   "token": "your bot token here",
   "webhook": "your webhook URL here"
 }`
+async function newClient(){
+console.log(`starting webhook client, use "$exit" to exit`)
 if (!fs.existsSync(`config.json`)) {
 fs.writeFile('config.json', obj, (err) => {
   if (err) throw err;
@@ -28,24 +30,15 @@ webhook = config.webhook
 const response = await fetch(webhook)
 const data = await response.json()
 console.log(data)
+console.log(`preparing your webhook, please wait for the ready message`)
 client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS], });
 client.on('messageCreate', async message => {
 if (data.channel_id == message.channelId){
 if (message.member) console.log(`${message.member.nickname}: \n${message.content}`);
 }})
-client.login(token);
-}
-async function main(){
-await rl.question('', async (answer) => {
-const hook = new Webhook(webhook);
-hook.send(answer)
-await rl.pause()
-})}
-rl.on('pause', async () => {
-rl.resume()
-await main()
-});
 client.on("ready", async (client) => {
 console.log(`ready`)
-await main()
 })
+client.login(token);
+} return client;}
+export { newClient, rl, webhook };
