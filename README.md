@@ -7,6 +7,7 @@
 5) Paste.io generator
 6) Generic Webpage Cloner
 7) 2FA Account Recoverer (requires authentication ticket, see [Special Notes](https://github.com/13-05/redpoint/tree/redpoint-js#special-notes))
+8) Custom webhook client (requires webhook URL, and a bot token with access to the webhook's channel, put these in the config.json file)
 
 ## TODOs
 - [ ] Discord ANSI Codeblock Gen
