@@ -30,7 +30,7 @@ webhook = config.webhook
 const response = await fetch(webhook)
 const data = await response.json()
 console.log(data)
-console.log(`preparing your webhook, please wait for the ready message`)
+console.log(`preparing your webhook, please wait for the ready message. \nAfter the ready message appears, you can type and send messages to your webhook.`)
 client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_MEMBERS], });
 client.on('messageCreate', async message => {
 if (data.channel_id == message.channelId){
