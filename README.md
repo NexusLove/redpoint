@@ -26,6 +26,7 @@ RedPoint rose from my need of a better, more stable, and more powerful version o
 - [ ] Discord Commandline Client Mode
 - [ ] Discord Token Lookup (gathers info on someone by their token)
 - [ ] Discord Server Cloner
+###### *cpp version is no longer updated, rust version will soon be sufficient so no worries.
 
 ## Community
 Join us on the matrix [here](https://matrix.to/#/!mgpMhaBWHrPHIuRdRC:matrix.org?via=matrix.org)!
