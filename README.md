@@ -26,7 +26,7 @@ Or, join our [Discord](https://dsc.gg/unwelcome)!
 ```sh
 > git clone -b redpoint-js https://github.com/13-05/redpoint
 > cd redpoint
-> node index.js
+> npm start
 ```
 If the `node index.js` fails, run `sudo apt install npm`.
 
