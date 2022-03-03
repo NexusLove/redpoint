@@ -3,9 +3,9 @@ import fs from "fs";
 import https from "https";
 import { Webhook } from "discord-webhook-node";
 import fetch from "node-fetch";
-import { main1 , welcome, rl } from "./main.js";
-import { newClient, webhook } from "./client.js";
-import { rl as newrl } from "./client.js";
+import { main1 , welcome, rl } from "./src/main.mjs";
+import { newClient, webhook } from "./src/client.mjs";
+import { rl as newrl } from "./src/client.mjs";
 import request from "request";
 let main = main1;
 /* globals & funcs */

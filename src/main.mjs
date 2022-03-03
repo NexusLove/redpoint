@@ -6,7 +6,7 @@ import fetch from "node-fetch";
 import readline from "readline";
 import { stdin as input, stdout as output } from 'node:process';
 import request from "request";
-var rl = readline.createInterface({
+export var rl = readline.createInterface({
   input: input,
   output: output,
   terminal: false
@@ -56,7 +56,7 @@ function help() {
   console.log(RESET);
 }
 
-function welcome(){
+export function welcome(){
   let welcomestr = "\n\n R   E   D   P   O   I   N   T\n\n";
   clearscr();
   console.log(`${RED}${welcomestr}${MAGENTA}`);
@@ -187,7 +187,7 @@ async function getSource(URL){
   );
 }
 
-async function main1(){
+export async function main1(){
 rl.question('', async (answer) => {
   if (answer == `exit`){
 console.log(`exiting...`)
@@ -237,7 +237,7 @@ rl.on('pause', () => {
 rl.resume()
 main().then().catch(console.err)
 });*/
-export { main1, welcome, rl };
+//export { main1, welcome, rl };
 //module.exports.main = main;
 //module.exports.rl = rl;
 //module.exports.welcome = welcome;
