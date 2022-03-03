@@ -11,6 +11,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.mjs"
+    "start": "node index.mjs",
+    "build": "esbuild index.mjs --bundle --platform=node --outfile=RedPoint.js",
+    "compile": "pkg RedPoint.js --targets node16-win-x64"
   }
 }
