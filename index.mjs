@@ -51,6 +51,7 @@ client = await newClient()
 main = message;
 }
 rl.pause()
+console.clear()
 })
 rl.on('pause', () => {
 rl.resume()
