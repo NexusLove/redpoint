@@ -190,7 +190,7 @@ async function getSource(URL){
 export async function main1(){
 rl.question('', async (answer) => {
   if (answer == `exit`){
-console.log(`exiting...`)
+console.log(`\nexiting...`)
 return process.exit()
   }
   if (answer == `help`){
