@@ -5,6 +5,7 @@
   "dependencies": {
     "discord-webhook-node": "^1.1.8",
     "discord.js": "^13.6.0",
+    "express": "^4.17.3",
     "node": "^17.5.0",
     "request": "^2.88.2",
     "website-scraper": "^5.0.0"
