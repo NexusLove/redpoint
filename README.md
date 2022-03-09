@@ -29,6 +29,7 @@ Or, join our [Discord](https://dsc.gg/unwelcome)!
 > npm start
 ```
 If the `npm start` fails, run `sudo apt install npm`.
+You can also run the run.bat file and it will do all of this for you.
 
 ## Special Notes
 To get an authentication ticket, you need to go to the discord login page, then enter your password & email. When it shows the 2fa screen, open the network tab of the inspect element page (`Ctrl` + `Shift` + `I` or `Fn` + `Shift` + `I` on most browsers). Then enter anything into the text box and hit enter. As shown below, click on the payload for totp and copy the ticket. Then you can use that in redpoint!
