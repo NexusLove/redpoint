@@ -3,7 +3,7 @@ import fs from "fs";
 import https from "https";
 import { Webhook } from "discord-webhook-node";
 import fetch from "node-fetch";
-import { main1 , welcome, rl } from "./src/main.mjs";
+import { main1 , welcome, rl, help } from "./src/main.mjs";
 import { newClient, webhook } from "./src/client.mjs";
 import { rl as newrl } from "./src/client.mjs";
 import request from "request";
@@ -43,15 +43,17 @@ rl.pause()
 })
 }
 welcome()
-console.log(`Please type the redpoint app you want to use.\nIf you do not type in a correct answer, it will default to main\nIf you choose main then run "help" for a list of commands`)
+console.log(`Please type the redpoint app you want to use.\nIf you do not type in a correct answer, it will default to main`)
 console.log(`${RED}MAIN \n${CYAN}WEBHOOK CLIENT${RESET}`)
 rl.question('', async (answer) => {
 if (answer == `webhook client`){
 client = await newClient()
 main = message;
+} else if (answer !== `webhook client`){
+console.clear()
+help()
 }
 rl.pause()
-console.clear()
 })
 rl.on('pause', () => {
 rl.resume()

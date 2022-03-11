@@ -6,6 +6,7 @@ import fetch from "node-fetch";
 import readline from "readline";
 import { stdin as input, stdout as output } from 'node:process';
 import request from "request";
+import { tok as tok } from "./tokencheck.mjs"
 export var rl = readline.createInterface({
   input: input,
   output: output,
@@ -34,7 +35,7 @@ function clearscr() {
   console.clear();
 }
 
-function help() {
+export function help() {
   console.log("\n");
   console.log(`${MAGENTA}USABLE COMMANDS: \n`);
   console.log(`${MAGENTA}1)${WHITE} exit ${BLUE} | ${GREEN} exits the program | ${CYAN} Syntax: None`);
@@ -44,11 +45,11 @@ function help() {
   console.log(`${MAGENTA}4)${BLUE} delete webhook ${BLUE} | ${GREEN} deletes a discord webhook | ${CYAN} Syntax: delete webhook <URL>`);
   console.log(`${MAGENTA}5)${BLUE} userid lookup ${BLUE} | ${GREEN} gets info on a discord userid | ${CYAN} Syntax: userid lookup <ID>`);
   console.log(`${MAGENTA}6)${BLUE} disable token ${BLUE} | ${GREEN} deletes a discord account by token | ${CYAN} Syntax: disable token <token>`);
-  console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in a file | ${CYAN} Syntax: not function yet`);
+  console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in the tokens.txt file | ${CYAN} Syntax: token check`);
 
   console.log(`${MAGENTA}8)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
-  console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address | ${CYAN} Syntax: not function yet`);
-  console.log(`${MAGENTA}10)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices | ${CYAN} Syntax: not function yet`);
+  console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address | ${CYAN} Syntax: not functional yet`);
+  console.log(`${MAGENTA}10)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices | ${CYAN} Syntax: not functional yet`);
   console.log(`${MAGENTA}11)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
   console.log(`${MAGENTA}12)${RED} brute-force 2fa ${BLUE} | ${GREEN} brute forces a lost 2fa account | ${CYAN} Syntax: brute-force 2fa <authentication ticket>`);
 
@@ -196,7 +197,9 @@ return process.exit()
   help();
   } else if (answer == `clear`){
   clearscr();
-} else if (answer.startsWith(`spam webhook`)){
+} else if (answer == `token check`){
+tok().then(console.log)
+}else if (answer.startsWith(`spam webhook`)){
 var args = answer.split(' ');
 let number = parseInt(args[3])
 spam_webhook(args[2], number, args[4]).then(console.log).catch(console.err)
