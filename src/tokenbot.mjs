@@ -17,13 +17,13 @@ class Checker {
             if (err) throw err;
         });
       });
-      handler.on('unverified', async (token) => {
+      handler.once('unverified', async (token) => {
         unverified.push(this.token);
         fs.appendFile('unverified.txt', this.token + "\n", (err) => {
           if (err) throw err;
         });
       });
-      handler.on('verified', async (token) => {
+      handler.once('verified', async (token) => {
         verified.push(this.token);
         fs.appendFile('verified.txt', this.token + "\n", (err) => {
             if (err) throw err;
