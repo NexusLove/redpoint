@@ -7,6 +7,7 @@ import readline from "readline";
 import { stdin as input, stdout as output } from 'node:process';
 import request from "request";
 import { tok as tok } from "./tokencheck.mjs"
+import { codeBlock as codeBlock } from "./codeblock.mjs"
 export var rl = readline.createInterface({
   input: input,
   output: output,
@@ -226,6 +227,13 @@ deleteWebhook(URL).then(console.log).catch(console.err)
 } else if (answer.startsWith(`clone webpage`)){
   var args = answer.split(' ');
   getSource(args[2])
+} else if (answer.startsWith(`codeblock`)){
+  let content = answer.split(' ').slice(1).join(' ');
+  content = `\`\`\`\n${content}\n\`\`\``
+let block = await codeBlock(content)
+let response = await pasteIO(block)
+let trypaste = JSON.parse(JSON.stringify(response))
+console.log(`View your codeblock at https://pastie.io/${trypaste.key}`)
 } else if (answer.startsWith(`brute-force 2fa`)){
   var args = answer.split(' ');
 await mfaBruteForcer(args[2])
