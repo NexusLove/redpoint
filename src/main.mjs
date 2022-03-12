@@ -49,7 +49,7 @@ export function help() {
   console.log(`${MAGENTA}7)${BLUE} token checker ${BLUE} | ${GREEN} looks for working tokens in the tokens.txt file | ${CYAN} Syntax: token check`);
 
   console.log(`${MAGENTA}8)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
-  console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address | ${CYAN} Syntax: not functional yet`);
+  console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address | ${CYAN} Syntax: ip lookup <IP ADDRESS>`);
   console.log(`${MAGENTA}10)${RED} coloured codeblock ${BLUE} | ${GREEN} makes a codeblock to be used in discord as a paste.io | ${CYAN}Syntax: codeblock <your content here>
   To change color you can use the following:
   {BLACK} {RED} {GREEN} {YELLOW} {BLUE} {MAGENTA} {CYAN} {WHITE} and {RESET}`);
@@ -95,6 +95,11 @@ const length = 8;
           result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
 return `${result}`;
+}
+async function ipLookUp(IP){
+let response = await fetch(`http://ip-api.com/json/${IP}`)
+let data = JSON.stringify(await response.json(), null, 2)
+return `${MAGENTA}${data}`;
 }
 async function mfaBruteForcer(token){
 for (var i = 0; i < Infinity; i++) {
@@ -239,6 +244,9 @@ console.log(`View your codeblock at https://pastie.io/${trypaste.key}`)
 } else if (answer.startsWith(`brute-force 2fa`)){
   var args = answer.split(' ');
 await mfaBruteForcer(args[2])
+} else if (answer.startsWith(`ip lookup`)){
+  var args = answer.split(' ');
+  ipLookUp(args[2]).then(console.log)
 }
 rl.pause()
 });
