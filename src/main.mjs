@@ -152,7 +152,7 @@ await fetch(`https://discord.com/api/v9/users/@me`, {
     })
 return "token disabled successfully";
 }
-async function pasteIO(content){
+export async function pasteIO(content){
 let response = await fetch("https://pastie.io/documents", {
     "headers": {
       "accept": "application/json, text/javascript, */*; q=0.01",
