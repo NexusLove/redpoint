@@ -50,7 +50,9 @@ export function help() {
 
   console.log(`${MAGENTA}8)${RED} clone webpage ${BLUE} | ${GREEN} command-line "view source" | ${CYAN} Syntax: clone webpage <URL>`);
   console.log(`${MAGENTA}9)${RED} ip lookup ${BLUE} | ${GREEN} gets information for an Ipv4 address | ${CYAN} Syntax: not functional yet`);
-  console.log(`${MAGENTA}10)${RED} cryptos ${BLUE} | ${GREEN} fetches current XMR, BTC, & ETH prices | ${CYAN} Syntax: not functional yet`);
+  console.log(`${MAGENTA}10)${RED} coloured codeblock ${BLUE} | ${GREEN} makes a codeblock to be used in discord as a paste.io | ${CYAN}Syntax: codeblock <your content here>
+  To change color you can use the following:
+  {BLACK} {RED} {GREEN} {YELLOW} {BLUE} {MAGENTA} {CYAN} {WHITE} and {RESET}`);
   console.log(`${MAGENTA}11)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
   console.log(`${MAGENTA}12)${RED} brute-force 2fa ${BLUE} | ${GREEN} brute forces a lost 2fa account | ${CYAN} Syntax: brute-force 2fa <authentication ticket>`);
 
@@ -229,7 +231,7 @@ deleteWebhook(URL).then(console.log).catch(console.err)
   getSource(args[2])
 } else if (answer.startsWith(`codeblock`)){
   let content = answer.split(' ').slice(1).join(' ');
-  content = `\`\`\`\n${content}\n\`\`\``
+  content = `\`\`\`ansi\n${content}\n\`\`\``
 let block = await codeBlock(content)
 let response = await pasteIO(block)
 let trypaste = JSON.parse(JSON.stringify(response))
