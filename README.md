@@ -10,10 +10,10 @@
 8) Custom webhook client (requires webhook URL, and a bot token with access to the webhook's channel, put these in the config.json file)
 9) Reverse IPV4 Lookup tool (relies on [ip-api.com](https://ip-api.com))
 10) Discord ANSI Codeblock Gen
+11) Discord Token Lookup (gathers info on someone by their token)
 ## TODOs
 - [ ] Current Crypto Prices
 - [ ] Discord Commandline Client Mode
-- [ ] Discord Token Lookup (gathers info on someone by their token)
 - [ ] Discord Server Cloner
 
 ## Community
