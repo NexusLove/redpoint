@@ -55,7 +55,7 @@ export function help() {
   {BLACK} {RED} {GREEN} {YELLOW} {BLUE} {MAGENTA} {CYAN} {WHITE} and {RESET}`);
   console.log(`${MAGENTA}11)${RED} make paste ${BLUE} | ${GREEN} makes a https://pastie.io/ paste | ${CYAN} Syntax: make paste <paste here>`);
   console.log(`${MAGENTA}12)${RED} brute-force 2fa ${BLUE} | ${GREEN} brute forces a lost 2fa account | ${CYAN} Syntax: brute-force 2fa <authentication ticket>`);
-
+  console.log(`${MAGENTA}12)${RED} token info ${BLUE} | ${GREEN} gathers information on someone using their token | ${CYAN} Syntax: token info <token>`);
   console.log(RESET);
 }
 
@@ -86,6 +86,13 @@ async function fetchUser(id){
 console.log(`${MAGENTA} ${JSON.stringify(await response.json(), null, 2)}`)
   return "User information fetched!"
 }
+async function getUserInfo(token) {
+let response = await fetch(`https://discord.com/api/v9/users/@me`,{
+"headers": {
+  "Authorization": token
+}})
+return `${MAGENTA} ${JSON.stringify(await response.json(), null, 2)}`;
+};
 function mfaGenerator(){
 const characters ='abcdefghijklmnopqrstuvwxyz0123456789';
 const length = 8;
@@ -247,6 +254,9 @@ await mfaBruteForcer(args[2])
 } else if (answer.startsWith(`ip lookup`)){
   var args = answer.split(' ');
   ipLookUp(args[2]).then(console.log)
+} else if (answer.startsWith(`token info`)){
+  var args = answer.split(' ');
+  getUserInfo(args[2]).then(console.log)
 }
 rl.pause()
 });
